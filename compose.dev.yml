@@ -1,7 +1,7 @@
 version: '3.8'
 
 services:
-  postgres:
+  db:
     image: postgres:latest
     environment:
       POSTGRES_USER: admin
@@ -11,3 +11,12 @@ services:
       - "5432:5432"
     volumes:
       - ./docker-data/postgres_data:/var/lib/postgresql/data
+
+  api:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    ports:
+      - "18000:18000"
+    depends_on:
+      - db

@@ -9,27 +9,35 @@ class Sgd(Base):
     id = Column(Integer, primary_key=True)
     name = Column(String, nullable=False)
 
-class FoodCategory(Base):
-    __tablename__ = 'food_categories'
+class Impact(Base):
+    __tablename__ = 'impacts'
     id = Column(Integer, primary_key=True)
     name = Column(String, nullable=False)
 
-class Food(Base):
-    __tablename__ = 'foods'
+class Product(Base):
+    __tablename__ = 'products'
     id = Column(Integer, primary_key=True)
     name = Column(String, nullable=False)
-    food_category_id = Column(Integer, ForeignKey('food_categories.id'), nullable=False)
-    sgd_id = Column(Integer, ForeignKey('sgds.id'), nullable=False)
+    sgd_id = Column(Integer, ForeignKey('sgds.id'), nullable=True)
+    impact_id = Column(Integer, ForeignKey('impacts.id'), nullable=True)
+    parent_id = Column(Integer, ForeignKey('products.id'), nullable=True)
 
-    food_category = relationship('FoodCategory')
     sgd = relationship('Sgd')
+    impact = relationship('Impact')
+    parent = relationship('Product', remote_side=[id], back_populates='children')
+    children = relationship('Product', back_populates='parent')
+
+class Company(Base):
+    __tablename__ = 'companies'
+    id = Column(Integer, primary_key=True)
+    name = Column(String, nullable=False)
 
 class CompanyRevenue(Base):
     __tablename__ = 'company_revenue'
     id = Column(Integer, primary_key=True)
-    name = Column(String, nullable=False)
-    year = Column(Integer, nullable=False)
-    food_id = Column(Integer, ForeignKey('foods.id'), nullable=False)
+    company_id = Column(Integer, ForeignKey('companies.id'), nullable=False)
+    product_id = Column(Integer, ForeignKey('products.id'), nullable=False)
     gmv = Column(Float, nullable=False)
 
-    food = relationship('Food')
+    company = relationship('Company')
+    product = relationship('Product')
