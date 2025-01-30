@@ -40,7 +40,7 @@ Shows aggregated GMV by SGD and Impact types for Upright (company_id=1):
 - Helps analyze company's contribution to different SDGs
 
 ## Sample Data
-The application automatically initializes the database with sample data from `dictionaries.py`:
+The application automatically initializes the database with sample data from `dictionaries.py` file. You can add more JSON to REVENUE_DICT in that file for further testing:
 
 1. SGDs: 17 Sustainable Development Goals types
 
