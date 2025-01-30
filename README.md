@@ -1,38 +1,78 @@
 # Assignment from The Upright Project for Bruce
 Date: 2025-01-30 15:00
 
-## 1. Objective
+## Quick Start
 
-- Companies are represented by their revenue mix, i.e. the share of revenue generated
-from each product or service the business markets
+### Run the Docker Compose file:
+```bash
+docker compose -f compose.dev.yml up --build
+```
 
-    - Example: 80% of Mike’s Fruit Farm’s revenue comes from Apples and 20% from
-Pears
+### Database Connection
+Default PostgreSQL connection details:
 
-- Products and services are modeled as a hierarchy, where all but one root product have
-zero to n children
-    - Example: Apples and Pears are Fruits. Fruits are Food. Some other things might
-be also Food
+* Host: localhost
+* Port: 5432
+* Database: dev
+* Username: admin
+* Password: 123456
 
-- The alignment of a given product or service is potentially denoted by one of the
-following 4 categories: “strongly aligned”, “aligned”, “misaligned” or “strongly
-misaligned”. A product is not necessarily categorized into any of these categories.
+### API Documentation
+Access the interactive API documentation at:
+```
+http://localhost:18000/docs
+```
 
-- SDG Alignment should be propagated in the taxonomy: if a product has no alignment
-defined, it should be considered to be aligned according to the nearest ancestor (dire
-parent, parent of parent etc)
-    - Example: if Fruits are defined to be aligned towards ending world hunger,
-should consider Apples and Pears also aligned, unless otherwise specifi
+1. Revenue Details `GET /revenues/1`
+Shows detailed revenue transactions for Upright (company_id=1), including:
+- Revenue ID
+- Product name & ID  
+- SGD ID & Impact ID (inherited from parent products if not directly set)
+- GMV value
 
-- There is no set example data, so you should generate some illustrative test examples
+2. Impact Reports `GET /reports/1`
+Shows aggregated GMV by SGD and Impact types for Upright (company_id=1):
+- Groups revenues by SDG types
+- Shows total GMV for each SDG-Impact combination
+- Includes SGD and Impact names
+- Helps analyze company's contribution to different SDGs
 
-- The idea is to create a proof-of-concept that can be demoed and discussed, as well as
-reviewed independently. Choice of tech stack is free and you can be creative with the
-solution. That said, our software engineers mainly use a stack of PostgreSQL, Node,
-React and TypeScript, so showcasing familiarity with any of them is a plus. Most
-candidates produce git repositories or zip archives of code and some simple README
-to explain how to use the solution
+## Sample Data
+The application automatically initializes the database with sample data from `dictionaries.py`:
 
-- Further bonus points are awarded for consideration of scalability: our current product
-graph contains ~20k products and services (of which ~10k are “leaf products” with no
-children), and ~500k companies
+1. SGDs: 17 Sustainable Development Goals types
+
+2. Products hierarchy: Food (root) => Fruits => [Apple, Pear]
+
+3. Companies:
+* Upright
+* Downleft
+* Bruce
+* Nguyen
+
+4. Revenues: Three sample revenue records logged with:
+* Company ID
+* Product ID
+* GMV (Gross Merchandise Value)
+The sample data demonstrates the product hierarchy and relationships between companies, products and revenues.
+
+```
+{
+    "id": 1,
+    "company_id": 1,
+    "product_id": 1,
+    "gmv": 1
+},
+{
+    "id": 2,
+    "company_id": 1,
+    "product_id": 3,
+    "gmv": 2
+},
+{
+    "id": 3,
+    "company_id": 1,
+    "product_id": 4,
+    "gmv": 4
+}
+```
