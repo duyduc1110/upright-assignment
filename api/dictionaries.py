@@ -119,3 +119,43 @@ PRODUCT_LIST = [
         "parent_id": 2
     },
 ]
+
+COMPANY_LIST = [
+    {
+        "id": 1,
+        "name": "Upright"
+    },
+    {
+        "id": 2,
+        "name": "Downleft"
+    },
+    {
+        "id": 3,
+        "name": "Bruce"
+    },
+    {
+        "id": 4,
+        "name": "Nguyen"
+    }
+]
+
+REVENUE_LIST = [
+    {
+        "id": 1,
+        "company_id": 1,
+        "product_id": 1,
+        "gmv": 1
+    },
+    {
+        "id": 2,
+        "company_id": 1,
+        "product_id": 3,
+        "gmv": 2
+    },
+    {
+        "id": 3,
+        "company_id": 1,
+        "product_id": 4,
+        "gmv": 4
+    }
+]

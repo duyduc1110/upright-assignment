@@ -41,27 +41,26 @@ class ProductCreateionSchema(BaseModel):
 class ProductSimpleSchema(BaseModel):
     id: int
     name: str
-    impact_id: int
-    sgd_id: int
+    impact_id: Optional[int] = None
+    sgd_id: Optional[int] = None
     parent_id: Optional[int] = None
 
     class Config:
         from_attributes = True
 
-class CompanyRevenueSchema(BaseModel):
+class RevenueSchema(BaseModel):
     id: int
-    name: str
+    company_id: int
     product_id: int
     gmv: float
-    product: ProductSchema
 
     class Config:
         from_attributes = True
 
-class CompanyRevenueCreationSchema(BaseModel):
-    name: str
-    product_id: int
+class RevenueSingleCompanySchema(BaseModel):
+    id: int
     gmv: float
+    product: ProductSimpleSchema
 
     class Config:
         from_attributes = True
