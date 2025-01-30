@@ -11,11 +11,11 @@ docker compose -f compose.dev.yml up --build
 ### Database Connection
 Default PostgreSQL connection details:
 
-* Host: localhost
-* Port: 5432
-* Database: dev
-* Username: admin
-* Password: 123456
+* Host: `localhost`
+* Port: `5432`
+* Database: `dev`
+* Username: `admin`
+* Password: `123456`
 
 ### API Documentation
 Access the interactive API documentation at:
@@ -23,14 +23,16 @@ Access the interactive API documentation at:
 http://localhost:18000/docs
 ```
 
-1. Revenue Details `GET /revenues/1`
+1. `GET /revenues/1`
+
 Shows detailed revenue transactions for Upright (company_id=1), including:
 - Revenue ID
 - Product name & ID  
 - SGD ID & Impact ID (inherited from parent products if not directly set)
 - GMV value
 
-2. Impact Reports `GET /reports/1`
+2. `GET /reports/1`
+
 Shows aggregated GMV by SGD and Impact types for Upright (company_id=1):
 - Groups revenues by SDG types
 - Shows total GMV for each SDG-Impact combination
