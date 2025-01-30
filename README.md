@@ -5,7 +5,8 @@ Date: 2025-01-30 15:00
 
 ### Run the Docker Compose file:
 ```bash
-docker compose -f compose.dev.yml up --build
+docker compose -f compose.dev.yml up db -d
+docker compose -f compose.dev.yml up api --build
 ```
 
 ### Database Connection
@@ -40,7 +41,7 @@ Shows aggregated GMV by SGD and Impact types for Upright (company_id=1):
 - Helps analyze company's contribution to different SDGs
 
 ## Sample Data
-The application automatically initializes the database with sample data from `dictionaries.py` file. You can add more JSON to REVENUE_DICT in that file for further testing:
+The application automatically initializes the database with sample data from `dictionaries.py` file:
 
 1. SGDs: 17 Sustainable Development Goals types
 
@@ -81,4 +82,29 @@ The sample data demonstrates the product hierarchy and relationships between com
     "product_id": 4,
     "gmv": 4
 }
+```
+
+## Create your own testing
+
+### 1. Stop all services
+```bash
+docker compose -f compose.dev.ynl dowm
+```
+
+### 2. Delete docker data
+Please make sure you have DELETED `docker-data` before running step 3
+
+### 3. Add more data
+
+You can add more JSON to `api/dictionaries.py` in that file for your test case:
+
+* `PRODUCT_LIST`: define more products and its parents
+* `REVENUE_LIST`: more revenue transactions to Upright or other companies
+
+`!!! PLEASE DETETE docker-data folder
+
+### 4. Build services
+```bash
+docker compose -f compose.dev.yml up db -d
+docker compose -f compose.dev.yml up api --build
 ```
