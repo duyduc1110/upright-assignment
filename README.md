@@ -44,7 +44,7 @@ The application automatically initializes the database with sample data from `di
 
 1. SGDs: 17 Sustainable Development Goals types
 
-2. Products hierarchy: Food (root) => Fruits => [Apple, Pear]
+2. Products hierarchy: `Food (root) => Fruits => [Apple, Pear]`
 
 3. Companies:
 * Upright
